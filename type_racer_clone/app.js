@@ -11,7 +11,7 @@ const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
 dotenv.config();
 
-mongoose.connect('mongodb://localhost:27017/typeracerTutorial',
+mongoose.connect('mongodb://0.0.0.0:27017/typeracerTutorial',
                  {useNewUrlParser : true, useUnifiedTopology : true},
                  ()=>{ console.log('successfully connected to database')});
 
@@ -140,8 +140,10 @@ io.on('connect',(socket)=>{
             // make players socket join the game room
             const gameID = game._id.toString();
             socket.join(gameID);
+
             // send updated game to all sockets within game
             io.to(gameID).emit('updateGame',game);
+
         }catch(err){
             console.log(err);
         }

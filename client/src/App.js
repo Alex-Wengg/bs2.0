@@ -1,5 +1,6 @@
 import React,{useEffect,useState} from 'react';
-import { Router,Route,Switch} from 'react-router-dom';
+import { BrowserRouter as Router,   createBrowserRouter, 
+  createRoutesFromElements, Route, RouterProvider} from 'react-router-dom';
 import history from './history';
 import GameMenu from './components/GameMenu';
 import CreateGame from './components/CreateGame';
@@ -12,28 +13,41 @@ function App() {
   useEffect(()=>{
     socket.on('updateGame',(game)=>{
       console.log(game);
+
       setGameState(game);
     });
     return ()=>{
+
       socket.removeAllListeners();
     }
   },[]);
+    // "react-router-dom": "^5.3.4",
 
   useEffect(()=>{
     if(gameState._id !== "")
       history.push(`/game/${gameState._id}`);
   },[gameState._id]);
   return (
-      <Router history={history}>
-        <Switch>
-          <Route exact path="/" component={GameMenu}/>
-          <Route path="/game/create" component={CreateGame}/>
-          <Route path="/game/join" component={JoinGame}/>
-          <Route path="/game/:gameID" render={props=> <TypeRacer {...props}
-                                                                 gameState={gameState}/>}/>
-        </Switch>
-      </Router>
-  );
-}
+
+    <RouterProvider router={
+      createBrowserRouter(
+        createRoutesFromElements(
+          <Route path="/" >
+
+
+            <Route exact path="/" element={<GameMenu/>}/>
+            <Route path="/game/create" element={<CreateGame/>}/>
+            <Route path="/game/join" element={<JoinGame/>}/>
+            <Route path="/game/:gameID" 
+              element={<TypeRacer gameState={gameState}/>}
+           />
+
+            </Route>
+  )) }   history={history}/>  
+      
+      
+      
+      );}
+
 
 export default App;

@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 mongoose.connect(
-  "mongodb://localhost/compilerdb",
+  "mongodb://0.0.0.0:27017/compilerdb",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

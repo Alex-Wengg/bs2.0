@@ -11,6 +11,7 @@ const CreateGame = props =>{
     const onSubmit = e =>{
         e.preventDefault();
         socket.emit('create-game',nickName);
+        console.log(nickName)
     }
 
     return(
