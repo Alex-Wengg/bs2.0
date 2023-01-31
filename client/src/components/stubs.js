@@ -11,6 +11,9 @@ int main() {
 }
 `;
 
-stubs.py = `print("Hello world!")`;
+stubs.py = `
+def add(x,y):
+ return x+y
+`;
 
 export default stubs;

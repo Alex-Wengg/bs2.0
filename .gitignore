@@ -41,6 +41,17 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+# exclude everything
+compiler_5000/codes/*
+
+# exception to the rule
+!compiler_5000/codes/.gitkeep 
+
+# exclude everything
+compiler_5000/outputs/*
+
+# exception to the rule
+!compiler_5000/outputs/.gitkeep 
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/

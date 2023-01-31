@@ -13,20 +13,18 @@ function App() {
   useEffect(()=>{
     socket.on('updateGame',(game)=>{
       console.log(game);
-
       setGameState(game);
     });
     return ()=>{
-
       socket.removeAllListeners();
     }
   },[]);
-    // "react-router-dom": "^5.3.4",
 
   useEffect(()=>{
     if(gameState._id !== "")
       history.push(`/game/${gameState._id}`);
   },[gameState._id]);
+  
   return (
 
     <RouterProvider router={

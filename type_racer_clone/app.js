@@ -9,7 +9,7 @@ const io = socketio(expressServer );
 const Game = require('./Models/Game');
 const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config(); 
 
 mongoose.connect('mongodb://0.0.0.0:27017/typeracerTutorial',
                  {useNewUrlParser : true, useUnifiedTopology : true},
@@ -21,25 +21,27 @@ io.on('connect',(socket)=>{
         try{
             // find the game
             let game = await Game.findById(gameID);
+            console.log(userInput)
             // if game has started and game isn't over
             if(!game.isOpen && !game.isOver){
                 // get player making the request
                 let player = game.players.find(player=> player.socketID === socket.id);
                 // get current word the user has to type
-                let word = game.words[player.currentWordIndex];
+                // let word = game.words[player.currentWordIndex];
                 // if player typed word correctly
-                if(word === userInput){
+                // if("Pasted" === userInput){
                     // advance player to next word
-                    player.currentWordIndex++;
+                    // player.currentWordIndex++;
                     // if user hasn't finished typing the sentence
-                    if(player.currentWordIndex !== game.words.length){
-                        // save the game
-                        game = await game.save();
-                        // send updated game to all sockets within game
-                        io.to(gameID).emit('updateGame',game);
-                    }
+                    // if(player.currentWordIndex !== game.words.length){
+                    //     // save the game
+                    //     game = await game.save();
+                    //     // send updated game to all sockets within game
+                    //     io.to(gameID).emit('updateGame',game);
+                    // }
                     // player is done typing sentence
-                    else{
+                    if("Passed" === userInput){
+                        console.log("hello")
                         // get timestamp of when the user finished
                         let endTime = new Date().getTime();
                         // get timestamp of when the game started
@@ -52,8 +54,9 @@ io.on('connect',(socket)=>{
                         socket.emit('done');
                         // send updated game to all sockets within game
                         io.to(gameID).emit('updateGame',game);
+
                     }
-                }
+                // }
             }
         }catch(err){
             console.log(err);
@@ -120,9 +123,12 @@ io.on('connect',(socket)=>{
     });
 
     socket.on('create-game',async (nickName)=>{
+        console.log("EMIT")
+
         try{
             // get words that our users have to type out
             const quotableData = await QuotableAPI();
+            console.log(nickName)
             // create game
             let game = new Game();
             // set words
@@ -139,9 +145,11 @@ io.on('connect',(socket)=>{
             game = await game.save();
             // make players socket join the game room
             const gameID = game._id.toString();
-            socket.join(gameID);
+            console.log(socket.join(gameID));
+            console.log(socket.join(gameID));
 
             // send updated game to all sockets within game
+            io.to(gameID).emit('updateGame',game);
             io.to(gameID).emit('updateGame',game);
 
         }catch(err){
@@ -209,6 +217,6 @@ const calculateWPM = (endTime,startTime,player) =>{
     let numOfWords = player.currentWordIndex;
     const timeInSeconds = (endTime - startTime) / 1000;
     const timeInMinutes = timeInSeconds / 60;
-    const WPM = Math.floor(numOfWords/ timeInMinutes);
-    return WPM;
+    const WPM = Math.floor(timeInMinutes);
+    return timeInMinutes;
 }

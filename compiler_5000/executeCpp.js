@@ -7,12 +7,12 @@ const outputPath = path.join(__dirname, "outputs");
 if (!fs.existsSync(outputPath)) {
   fs.mkdirSync(outputPath, { recursive: true });
 }
-
+ 
 const executeCpp = (filepath) => {
   const jobId = path.basename(filepath).split(".")[0];
   const outPath = path.join(outputPath, `${jobId}.out`);
 
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => { 
     exec(
       `g++ ${filepath} -o ${outPath} && cd ${outputPath} && ./${jobId}.out`,
       (error, stdout, stderr) => {
@@ -21,7 +21,7 @@ const executeCpp = (filepath) => {
         resolve(stdout);
       }
     );
-  });
+  }); 
 };
 
 module.exports = {

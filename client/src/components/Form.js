@@ -9,7 +9,7 @@ import moment from "moment";
 const Form = ({isOpen,isOver,gameID})=>{
     const [code, setCode] = useState("");
     const [output, setOutput] = useState("");
-    const [language, setLanguage] = useState("cpp");
+    const [language, setLanguage] = useState("py");
     const [jobId, setJobId] = useState(null);
     const [status, setStatus] = useState(null);
     const [jobDetails, setJobDetails] = useState(null);
@@ -19,7 +19,7 @@ const Form = ({isOpen,isOver,gameID})=>{
     }, [language]);
   
     useEffect(() => {
-      const defaultLang = localStorage.getItem("default-language") || "cpp";
+      const defaultLang = localStorage.getItem("default-language") || "py";
       setLanguage(defaultLang);
     }, []);
   
@@ -59,6 +59,10 @@ const Form = ({isOpen,isOver,gameID})=>{
               setJobDetails(job);
               if (jobStatus === "pending") return;
               setOutput(jobOutput);
+
+              socket.emit('userInput',{userInput:jobOutput,gameID});
+
+
               clearInterval(pollInterval);
             } else {
               console.error(error);
@@ -80,10 +84,10 @@ const Form = ({isOpen,isOver,gameID})=>{
       }
     };
   
-    const setDefaultLanguage = () => {
-      localStorage.setItem("default-language", language);
-      console.log(`${language} set as default!`);
-    };
+    // const setDefaultLanguage = () => {
+    //   localStorage.setItem("default-language", language);
+    //   console.log(`${language} set as default!`);
+    // };
   
     const renderTimeDetails = () => {
       if (!jobDetails) {
@@ -104,8 +108,8 @@ const Form = ({isOpen,isOver,gameID})=>{
     return (
       <div className="App">
         <h1>Online Code Compiler</h1>
-        <p>Two Sum</p>
-        <div>
+        <p>Add Two Numbers</p>
+        {/* <div>
           <label>Language:</label>
           <select
             value={language}
@@ -121,15 +125,16 @@ const Form = ({isOpen,isOver,gameID})=>{
             <option value="cpp">C++</option>
             <option value="py">Python</option>
           </select>
-        </div>
-        <br />
+        </div> */}
+        {/* <br />
         <div>
           <button onClick={setDefaultLanguage}>Set Default</button>
         </div>
-        <br />
+        <br /> */}
         <textarea
           rows="20"
           cols="75"
+          readOnly={isOpen || isOver}
           value={code}
           onChange={(e) => {
             setCode(e.target.value);
