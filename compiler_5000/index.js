@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 mongoose.connect(
-  "mongodb://0.0.0.0:27017/compilerdb",
+  "mongodb://mongo:27017/compilerdb",
+
+  // "mongodb://0.0.0.0:27017/compilerdb",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -35,7 +37,11 @@ app.post("/run", async (req, res) => {
   // need to generate a c++ file with content from the request
   const filepath = await generateFile(language, code);
   // write into DB
+  console.log(" filepath: ", filepath);
+
   const job = await new Job({ language, filepath }).save();
+  console.log(" jobId: ", jobId);
+
   const jobId = job["_id"];
   addJobToQueue(jobId);
   res.status(201).json({ jobId });

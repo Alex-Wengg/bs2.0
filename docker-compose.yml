@@ -1,0 +1,70 @@
+version: '3.9'
+
+services:
+  compiler_5000:
+    build:
+      context: ./compiler_5000
+      dockerfile: Dockerfile
+    container_name: compiler_5000
+    volumes:
+      - ./server/:/usr/src/app/compiler_5000
+      - /usr/src/compiler_5000/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  type_racer_clone:
+    build:
+      context: ./type_racer_clone
+      dockerfile: Dockerfile
+    container_name: type-racer-clone
+    volumes:
+      - ./server/:/usr/src/app/type_racer_clone
+      - /usr/src/type_racer_clone/app/node_modules
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: react-client
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    stdin_open: true
+
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local

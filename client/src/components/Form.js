@@ -37,6 +37,7 @@ const Form = ({isOpen,isOver,gameID})=>{
         setJobDetails(null);
         console.log(payload)
         const { data } = await axios.post("http://localhost:5000/run", payload);
+        
         if (data.jobId) {
           setJobId(data.jobId);
           setStatus("Submitted.");

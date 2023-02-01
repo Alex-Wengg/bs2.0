@@ -10,9 +10,14 @@ const executePy = (filepath) => {
       (error, stdout, stderr) => {
         error && reject({ error, stderr });
         stderr && reject(stderr);
+        console.log("stdout")
+        console.log(error)
+
+        console.log(stderr)
         resolve(stdout);
       }
     );
+
   });
 };
 

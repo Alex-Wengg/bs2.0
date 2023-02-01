@@ -11,7 +11,10 @@ const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
 dotenv.config(); 
 
-mongoose.connect('mongodb://0.0.0.0:27017/typeracerTutorial',
+mongoose.connect(
+    'mongodb://mongo:27017/typeracerTutorial',
+    
+    // 'mongodb://0.0.0.0:27017/typeracerTutorial',
                  {useNewUrlParser : true, useUnifiedTopology : true},
                  ()=>{ console.log('successfully connected to database')});
 
