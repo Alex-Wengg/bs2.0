@@ -123,7 +123,6 @@ io.on('connect',(socket)=>{
     });
 
     socket.on('create-game',async (nickName)=>{
-        console.log("EMIT")
 
         try{
             // get words that our users have to type out
@@ -145,11 +144,10 @@ io.on('connect',(socket)=>{
             game = await game.save();
             // make players socket join the game room
             const gameID = game._id.toString();
-            console.log(socket.join(gameID));
-            console.log(socket.join(gameID));
+            socket.join(gameID);
 
             // send updated game to all sockets within game
-            io.to(gameID).emit('updateGame',game);
+            // io.to(gameID).emit('updateGame',game);
             io.to(gameID).emit('updateGame',game);
 
         }catch(err){

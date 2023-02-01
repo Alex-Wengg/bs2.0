@@ -8,10 +8,10 @@ const CreateGame = props =>{
         setNickName(e.target.value);
     }
 
-    const onSubmit = e =>{
+    const onSubmit = async (e) =>{
         e.preventDefault();
+        console.log(socket.connected);
         socket.emit('create-game',nickName);
-        console.log(nickName)
     }
 
     return(
