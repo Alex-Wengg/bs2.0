@@ -1,7 +1,7 @@
 #  Dockerfile for Node Express Backend api (development)
 
 FROM node:14.15.3-alpine3.12
-RUN apk update || : && apk add python3
+RUN apk update || : && apk add python3 
 
 ARG NODE_ENV=development
 
@@ -19,6 +19,5 @@ COPY . .
 
 # Exports
 EXPOSE 5000
-
 
 CMD ["npm","start"]

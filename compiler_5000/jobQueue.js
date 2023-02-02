@@ -4,11 +4,14 @@ const Job = require("./models/Job");
 const { executeCpp } = require("./executeCpp");
 const { executePy } = require("./executePy");
 
-const jobQueue = new Queue("job-runner-queue");
+const jobQueue = new Queue("job-runner-queue", 'redis://redis:6379');
 const NUM_WORKERS = 5;
 
 jobQueue.process(NUM_WORKERS, async ({ data }) => {
+  console.log('assss')
+
   const jobId = data.id;
+  
   const job = await Job.findById(jobId);
   if (job === undefined) {
     throw Error(`cannot find Job with id ${jobId}`);
@@ -37,6 +40,8 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
     await job.save();
     throw Error(JSON.stringify(err));
   }
+  done();
+
 });
 
 jobQueue.on("failed", (error) => {
@@ -44,6 +49,8 @@ jobQueue.on("failed", (error) => {
 });
 
 const addJobToQueue = async (jobId) => {
+  console.log('INSERTED')
+
   jobQueue.add({
     id: jobId,
   });
