@@ -50,7 +50,6 @@ compiler_5000/codes/*
 # exclude everything
 compiler_5000/outputs/*
 
-online-compiler
 # exception to the rule
 !compiler_5000/outputs/.gitkeep 
 
