@@ -12,9 +12,9 @@ const dotenv = require('dotenv');
 dotenv.config(); 
 
 mongoose.connect(
-    'mongodb://mongo:27017/typeracerTutorial',
+    'mongodb://mongo:27017/CodeRacer',
     
-    // 'mongodb://0.0.0.0:27017/typeracerTutorial',
+    // 'mongodb://0.0.0.0:27017/CodeRacer',
                  {useNewUrlParser : true, useUnifiedTopology : true},
                  ()=>{ console.log('successfully connected to database')});
 
@@ -119,6 +119,8 @@ io.on('connect',(socket)=>{
                 game = await game.save();
                 // send updated game to all sockets within game
                 io.to(gameID).emit('updateGame',game);
+                io.to(gameID).emit('updateGame',game);
+
             }
         }catch(err){
             console.log(err);

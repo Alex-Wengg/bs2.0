@@ -14,7 +14,7 @@ const findPlayer = players=>{
     return players.find(player => player.socketID === socket.id);
 }
 
-const TypeRacer = ({gameState})=>{
+const CodeRacer = ({gameState})=>{
     const {_id,players,words,isOpen,isOver} = gameState;
     const player = findPlayer(players);
     if(_id === "")
@@ -22,8 +22,13 @@ const TypeRacer = ({gameState})=>{
     return(
         <div className="text-center">
  
+            <p> Only gamer leader can start the game</p>
+            <p> Submit button will start once the countdown is zero </p>
+            <p> Scoreboard is at the bottom </p>
+
             <Form isOpen={isOpen} isOver={isOver} gameID={_id}/>
             <CountDown/>
+
             <StartBtn player={player} gameID={_id}/>
             { isOpen ? <DisplayGameCode gameID={_id}/> : null}
             <ScoreBoard players={players}/>
@@ -32,4 +37,4 @@ const TypeRacer = ({gameState})=>{
 
 }
 
-export default TypeRacer;
+export default CodeRacer;

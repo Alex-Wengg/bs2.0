@@ -1,14 +1,14 @@
 version: '3.9'
 
 services:
-  compiler_5000:
+  online-compiler:
     build:
-      context: ./compiler_5000
+      context: ./online-compiler
       dockerfile: Dockerfile
-    container_name: compiler_5000
+    container_name: online-compiler
     volumes:
-      - ./server/:/usr/src/app/compiler_5000
-      - /usr/src/compiler_5000/app/node_modules
+      - ./server/:/usr/src/app/online-compiler
+      - /usr/src/online-compiler/app/node_modules
     ports:
       - "5000:5000"
     depends_on:

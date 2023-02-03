@@ -2,7 +2,7 @@ import React from 'react';
 
 const getScoreboard = (players)=>{
     const scoreBoard = players.filter(player => player.WPM !== -1);
-    return scoreBoard.sort((a,b)=> a.WPM > b.WPM ? -1 : b.WPM > a.WPM ? 1 : 0);
+    return scoreBoard.sort((a,b)=> a.WPM < b.WPM ? -1 : b.WPM < a.WPM ? 1 : 0);
 }
 
 const ScoreBoard = ({players})=>{
@@ -15,7 +15,7 @@ const ScoreBoard = ({players})=>{
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">User</th>
-                    <th scope="col">WPM</th>
+                    <th scope="col">Time</th>
                 </tr>
             </thead>
             <tbody>

@@ -6,7 +6,7 @@ import GameMenu from './components/GameMenu';
 import CreateGame from './components/CreateGame';
 import JoinGame from './components/JoinGame';
 import socket from './socketConfig';
-import TypeRacer from './components/TypeRacer';
+import CodeRacer from './components/CodeRacer';
 function App() {
   const [gameState,setGameState] = useState({_id : "",isOpen : false,players : [],words : []});
   
@@ -37,7 +37,7 @@ function App() {
             <Route path="/game/create" element={<CreateGame/>}/>
             <Route path="/game/join" element={<JoinGame/>}/>
             <Route path="/game/:gameID" 
-              element={<TypeRacer gameState={gameState}/>}
+              element={<CodeRacer gameState={gameState}/>}
            />
 
             </Route>

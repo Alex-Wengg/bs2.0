@@ -8,7 +8,7 @@ const jobQueue = new Queue("job-runner-queue", 'redis://redis:6379');
 const NUM_WORKERS = 5;
 
 jobQueue.process(NUM_WORKERS, async ({ data }) => {
-  console.log('assss')
+
 
   const jobId = data.id;
   
@@ -24,9 +24,6 @@ jobQueue.process(NUM_WORKERS, async ({ data }) => {
     } else if (job.language === "py") {
       output = await executePy(job.filepath);
     }
-    console.log('[')
-    console.log(output)
-    console.log(']')
 
     job["completedAt"] = new Date();
     job["output"] = output;

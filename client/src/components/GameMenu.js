@@ -4,7 +4,8 @@ const GameMenu = props =>{
     let history = useNavigate();
     return(
         <div className="text-center">
-            <h1>Welcome to Type Racer Clone</h1>
+            <h1>Welcome to Onliner Coder Race</h1>
+            <p>Race your friends to solve questions </p>
             <button type="button" onClick={()=> history('/game/create')}
                                   className="btn btn-primary btn-lg mr-3"
                                   style={{cursor:'pointer'}}>Create Game</button>

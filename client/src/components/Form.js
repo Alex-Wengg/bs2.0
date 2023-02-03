@@ -32,56 +32,14 @@ const Form = ({isOpen,isOver,gameID})=>{
       };
       try {
         setOutput("");
-        setStatus(null);
-        setJobId(null);
-        setJobDetails(null);
-        console.log(payload)
         const { data } = await axios.post("http://localhost:5000/run", payload);
-        
-        if (data.jobId) {
-          setJobId(data.jobId);
-          setStatus("Submitted.");
-  
-          // poll here
-          pollInterval = setInterval(async () => {
-            const { data: statusRes } = await axios.get(
-              `http://localhost:5000/status`,
-              {
-                params: {
-                  id: data.jobId,
-                },
-              }
-            );
-            const { success, job, error } = statusRes;
-            console.log(statusRes);
-            if (success) {
-              const { status: jobStatus, output: jobOutput } = job;
-              setStatus(jobStatus);
-              setJobDetails(job);
-              if (jobStatus === "pending") return;
-              setOutput(jobOutput);
 
-              socket.emit('userInput',{userInput:jobOutput,gameID});
+        setOutput(data.output);
+        socket.emit('userInput',{userInput:data.output,gameID});
 
-
-              clearInterval(pollInterval);
-            } else {
-              console.error(error);
-              setOutput(error);
-              setStatus("Bad request");
-              clearInterval(pollInterval);
-            }
-          }, 1000);
-        } else {
-          setOutput("Retry again.");
-        }
       } catch ({ response }) {
-        if (response) {
-          const errMsg = response.data.err.stderr;
-          setOutput(errMsg);
-        } else {
-          setOutput("Please retry submitting.");
-        }
+        const errMsg = response.data.err.stderr;
+        setOutput(errMsg);
       }
     };
   
@@ -90,21 +48,21 @@ const Form = ({isOpen,isOver,gameID})=>{
     //   console.log(`${language} set as default!`);
     // };
   
-    const renderTimeDetails = () => {
-      if (!jobDetails) {
-        return "";
-      }
-      let { submittedAt, startedAt, completedAt } = jobDetails;
-      let result = "";
-      submittedAt = moment(submittedAt).toString();
-      result += `Job Submitted At: ${submittedAt}  `;
-      if (!startedAt || !completedAt) return result;
-      const start = moment(startedAt);
-      const end = moment(completedAt);
-      const diff = end.diff(start, "seconds", true);
-      result += `Execution Time: ${diff}s`;
-      return result;
-    };
+    // const renderTimeDetails = () => {
+    //   if (!jobDetails) {
+    //     return "";
+    //   }
+    //   let { submittedAt, startedAt, completedAt } = jobDetails;
+    //   let result = "";
+    //   submittedAt = moment(submittedAt).toString();
+    //   result += `Job Submitted At: ${submittedAt}  `;
+    //   if (!startedAt || !completedAt) return result;
+    //   const start = moment(startedAt);
+    //   const end = moment(completedAt);
+    //   const diff = end.diff(start, "seconds", true);
+    //   result += `Execution Time: ${diff}s`;
+    //   return result;
+    // };
   
     return (
       <div className="App">
@@ -142,10 +100,10 @@ const Form = ({isOpen,isOver,gameID})=>{
           }}
         ></textarea>
         <br />
-        <button onClick={handleSubmit}>Submit</button>
+        {isOpen || isOver ?  <></> :  <button onClick={handleSubmit}>Submit</button>}
         <p>{status}</p>
         <p>{jobId ? `Job ID: ${jobId}` : ""}</p>
-        <p>{renderTimeDetails()}</p>
+        {/* <p>{renderTimeDetails()}</p> */}
         <p>{output}</p>
       </div>
     );
