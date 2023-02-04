@@ -32,7 +32,8 @@ const Form = ({isOpen,isOver,gameID})=>{
       };
       try {
         setOutput("");
-        const { data } = await axios.post("http://localhost:5000/run", payload);
+       //5000
+        const { data } = await axios.post("https://online-compiler-ohjzsdclpa-uc.a.run.app/run", payload);
 
         setOutput(data.output);
         socket.emit('userInput',{userInput:data.output,gameID});
