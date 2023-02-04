@@ -32,6 +32,7 @@ const Form = ({isOpen,isOver,gameID})=>{
       };
       try {
         setOutput("");
+       //5000
         const { data } = await axios.post("https://online-compiler-ohjzsdclpa-uc.a.run.app/run", payload);
 
         setOutput(data.output);
