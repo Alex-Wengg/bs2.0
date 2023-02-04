@@ -13,7 +13,7 @@ const dotenv = require('dotenv');
 dotenv.config(); 
 
 mongoose.connect(
-    "mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority',
+    "mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority",
     
     // 'mongodb://0.0.0.0:27017/CodeRacer',
                  {useNewUrlParser : true, useUnifiedTopology : true},
