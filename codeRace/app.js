@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const socketio = require('socket.io');
 const mongoose = require('mongoose');
-const mongodb = request( "mongodb");
+const mongodb = require( "mongodb");
 
 const expressServer = app.listen(3001);
 const io = socketio(expressServer );
@@ -12,15 +12,15 @@ const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
 dotenv.config(); 
 
-// mongoose.connect(
-//     'mongodb://mongo:27017/CodeRacer',
+mongoose.connect(
+    "mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority',
     
-//     // 'mongodb://0.0.0.0:27017/CodeRacer',
-//                  {useNewUrlParser : true, useUnifiedTopology : true},
-//                  ()=>{ console.log('successfully connected to database')});
+    // 'mongodb://0.0.0.0:27017/CodeRacer',
+                 {useNewUrlParser : true, useUnifiedTopology : true},
+                 ()=>{ console.log('successfully connected to database')});
 
-const client = new mongodb.MongoClient("mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority");
-client.connect();
+// const client = new mongodb.MongoClient("mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority");
+// client.connect();
 
 
 io.on('connect',(socket)=>{
