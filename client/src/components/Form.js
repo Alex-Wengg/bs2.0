@@ -32,7 +32,7 @@ const Form = ({isOpen,isOver,gameID})=>{
       };
       try {
         setOutput("");
-        const { data } = await axios.post("https://coderace-ohjzsdclpa-uc.a.run.app/run", payload);
+        const { data } = await axios.post("https://online-compiler-ohjzsdclpa-uc.a.run.app/run", payload);
 
         setOutput(data.output);
         socket.emit('userInput',{userInput:data.output,gameID});
