@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const socketio = require('socket.io');
 const mongoose = require('mongoose');
-import * as mongodb from "mongodb";
+const mongodb = request( "mongodb");
 
 const expressServer = app.listen(3001);
 const io = socketio(expressServer );
