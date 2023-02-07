@@ -19,4 +19,11 @@ const GameSchema = new mongoose.Schema({
     startTime : {type : Number}
 });
 
+const QuestionSchema = new mongoose.Schema({
+    id: ObjectIdSchema,
+    title : [{type : String}],
+    text : [{type : String}],
+    file : [{type : String}]
+});
+
 module.exports = mongoose.model('Game',GameSchema);
