@@ -10,12 +10,12 @@ const Game = require('./Models/Game');
 const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
 dotenv.config(); 
-import questions from ('./Models/Questions.json')
+const questions = require('./Models/Questions.json')
 
 mongoose.connect(
-    'mongodb://mongo:27017/CodeRacer',
+    // 'mongodb://mongo:27017/CodeRacer',
     
-    // 'mongodb://0.0.0.0:27017/CodeRacer',
+    process.env.MONGO,
                  {useNewUrlParser : true, useUnifiedTopology : true},
                  ()=>{ console.log('successfully connected to database')});
 
@@ -144,7 +144,10 @@ io.on('connect',(socket)=>{
                 isPartyLeader : true,
                 nickName
             }
-            let question = questions[Math.floor(Math.random()*questions.length)]
+            let question = questions[3]
+
+            // let question = questions[Math.floor(Math.random()*questions.length)]
+            console.log(question)
             game.question = question
             // add player
             game.players.push(player);
@@ -156,6 +159,7 @@ io.on('connect',(socket)=>{
 
             // send updated game to all sockets within game
             // io.to(gameID).emit('updateGame',game);
+            io.to(gameID).emit('updateGame',game);
             io.to(gameID).emit('updateGame',game);
 
         }catch(err){

@@ -11,21 +11,24 @@ const PlayerSchema = new mongoose.Schema({
     nickName : {type : String}
 });
 
+const QuestionSchema = new mongoose.Schema({
+    title : {type : String},
+    text : {type : String},
+    file : {type : String},
+    output : {type: String},
+    starter : {type : String},
+    id : {type: Number}
+});
+
 const GameSchema = new mongoose.Schema({
     words : [{type : String}],
     isOpen : {type : Boolean,default : true},
     isOver : {type : Boolean,default : false},
     players : [PlayerSchema],
     question : QuestionSchema,
-
     startTime : {type : Number}
 });
 
-const QuestionSchema = new mongoose.Schema({
-    id: ObjectIdSchema,
-    title : [{type : String}],
-    text : [{type : String}],
-    file : [{type : String}]
-});
+
 
 module.exports = mongoose.model('Game',GameSchema);
