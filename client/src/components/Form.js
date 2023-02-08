@@ -1,9 +1,8 @@
 import React, {useState,useRef,useEffect} from 'react';
 import socket from '../socketConfig';
+import CodeEditor from '@uiw/react-textarea-code-editor';
 
 import axios from "axios";
-import stubs from "./stubs";
-import moment from "moment";
  
 
 const Form = ({isOpen,isOver,gameID, question})=>{
@@ -11,9 +10,10 @@ const Form = ({isOpen,isOver,gameID, question})=>{
     const [output, setOutput] = useState("");
     const [language, setLanguage] = useState("py");
     const [jobId, setJobId] = useState(null);
+    const [testfile, setFile] = useState("");
+
     const [status, setStatus] = useState(null);
     const [jobDetails, setJobDetails] = useState(null);
-  
     useEffect(() => {
       setCode(question.starter);
     }, [language]);
@@ -21,21 +21,21 @@ const Form = ({isOpen,isOver,gameID, question})=>{
     useEffect(() => {
       const defaultLang = localStorage.getItem("default-language") || "py";
       setLanguage(defaultLang);
+      setFile(question.file)
     }, []);
   
     let pollInterval;
-  
+    let test = question.file
     const handleSubmit = async () => {
       const payload = {
         language,
         code,
-        question.file
+        testfile,
       };
       try {
         setOutput("");
        //5000
-        const { data } = await axios.post("https://online-compiler-ohjzsdclpa-uc.a.run.app/run", payload);
-
+        const { data } = await axios.post(process.env.REACT_APP_RUN, payload);
         setOutput(data.output);
         socket.emit('userInput',{userInput:data.output,gameID});
 
@@ -45,62 +45,29 @@ const Form = ({isOpen,isOver,gameID, question})=>{
       }
     };
   
-    // const setDefaultLanguage = () => {
-    //   localStorage.setItem("default-language", language);
-    //   console.log(`${language} set as default!`);
-    // };
-  
-    // const renderTimeDetails = () => {
-    //   if (!jobDetails) {
-    //     return "";
-    //   }
-    //   let { submittedAt, startedAt, completedAt } = jobDetails;
-    //   let result = "";
-    //   submittedAt = moment(submittedAt).toString();
-    //   result += `Job Submitted At: ${submittedAt}  `;
-    //   if (!startedAt || !completedAt) return result;
-    //   const start = moment(startedAt);
-    //   const end = moment(completedAt);
-    //   const diff = end.diff(start, "seconds", true);
-    //   result += `Execution Time: ${diff}s`;
-    //   return result;
-    // };
-  
+
     return (
       <div className="App">
         <h1>{question.title}</h1>
         <p>{question.text}</p>
-        {/* <div>
-          <label>Language:</label>
-          <select
-            value={language}
-            onChange={(e) => {
-              const shouldSwitch = window.confirm(
-                "Are you sure you want to change language? WARNING: Your current code will be lost."
-              );
-              if (shouldSwitch) {
-                setLanguage(e.target.value);
-              }
-            }}
-          >
-            <option value="cpp">C++</option>
-            <option value="py">Python</option>
-          </select>
-        </div> */}
-        {/* <br />
-        <div>
-          <button onClick={setDefaultLanguage}>Set Default</button>
-        </div>
-        <br /> */}
-        <textarea
-          rows="20"
-          cols="75"
+        <p>Output: {question.output}</p>
+
+      {isOpen || isOver ?  <></> :
+        <CodeEditor
+        language="py"
+
           readOnly={isOpen || isOver}
           value={code}
+          padding={15}
+          style={{
+            fontSize: 12,
+            backgroundColor: "#f5f5f5",
+            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+          }}
           onChange={(e) => {
             setCode(e.target.value);
           }}
-        ></textarea>
+        /> }
         <br />
         {isOpen || isOver ?  <></> :  <button onClick={handleSubmit}>Submit</button>}
         <p>{status}</p>

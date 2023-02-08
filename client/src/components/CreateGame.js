@@ -10,6 +10,7 @@ const CreateGame = props =>{
 
     const onSubmit = async (e) =>{
         e.preventDefault();
+        console.log(process.env.SOCKET)
         console.log(socket.connected);
         socket.emit('create-game',nickName);
     }
