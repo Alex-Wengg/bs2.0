@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.post("/run", async (req, res) => {
-  const { language = "cpp", code } = req.body;
+  const { language = "cpp", code, testFile } = req.body;
 
   console.log(language, "Length:", code.length);
 
@@ -30,7 +30,7 @@ app.post("/run", async (req, res) => {
     if (language === "cpp") {
       output = await executeCpp(filepath);
     } else if (language === "py") {
-      output = await executePy(filepath);
+      output = await executePy(filepath, testFile);
     }
     fs.rmSync(filepath, {
       force: true,
