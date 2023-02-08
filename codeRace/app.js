@@ -10,6 +10,7 @@ const Game = require('./Models/Game');
 const QuotableAPI = require('./QuotableAPI');
 const dotenv = require('dotenv');
 dotenv.config(); 
+import questions from ('./Models/Questions.json')
 
 mongoose.connect(
     'mongodb://mongo:27017/CodeRacer',
@@ -143,6 +144,8 @@ io.on('connect',(socket)=>{
                 isPartyLeader : true,
                 nickName
             }
+            let question = questions[Math.floor(Math.random()*questions.length)]
+            game.question = question
             // add player
             game.players.push(player);
             // save the game

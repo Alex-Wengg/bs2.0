@@ -3,15 +3,15 @@
         "id" : 1,
         "title" : "Two Sum",
         "text" : "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
-        "file" : "twosum.py",
-        "start" : "def twoSum(nums: List[int], target: int) -> List[int]:"
+        "file" : "two_sum.py",
+        "starter" : "def twoSum(nums: List[int], target: int) -> List[int]:"
     },
     {
         "id" : 42,
         "title" : "Trapping Rain Water",
         "text": "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
         "file" : "trapping_rain_water.py",
-        "start" : "def trap(height: List[int]) -> int" 
+        "starter" : "def trap(height: List[int]) -> int" 
     }
 
 ]
