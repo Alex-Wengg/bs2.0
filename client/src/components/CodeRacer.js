@@ -14,8 +14,9 @@ const findPlayer = players=>{
     return players.find(player => player.socketID === socket.id);
 }
 
+
 const CodeRacer = ({gameState})=>{
-    const {_id,players,words,isOpen,isOver} = gameState;
+    const {_id,players,words,isOpen,isOver, question} = gameState;
     const player = findPlayer(players);
     if(_id === "")
         return <Navigate  to="/"/>
@@ -26,7 +27,7 @@ const CodeRacer = ({gameState})=>{
             <p> Submit button will start once the countdown is zero </p>
             <p> Scoreboard is at the bottom </p>
 
-            <Form isOpen={isOpen} isOver={isOver} gameID={_id}/>
+            <Form isOpen={isOpen} isOver={isOver} gameID={_id} question={question}/>
             <CountDown/>
 
             <StartBtn player={player} gameID={_id}/>

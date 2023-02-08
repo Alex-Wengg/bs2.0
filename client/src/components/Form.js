@@ -6,7 +6,7 @@ import stubs from "./stubs";
 import moment from "moment";
  
 
-const Form = ({isOpen,isOver,gameID})=>{
+const Form = ({isOpen,isOver,gameID, question})=>{
     const [code, setCode] = useState("");
     const [output, setOutput] = useState("");
     const [language, setLanguage] = useState("py");
@@ -15,7 +15,7 @@ const Form = ({isOpen,isOver,gameID})=>{
     const [jobDetails, setJobDetails] = useState(null);
   
     useEffect(() => {
-      setCode(stubs[language]);
+      setCode(question.starter);
     }, [language]);
   
     useEffect(() => {
@@ -29,6 +29,7 @@ const Form = ({isOpen,isOver,gameID})=>{
       const payload = {
         language,
         code,
+        question.file
       };
       try {
         setOutput("");
@@ -67,8 +68,8 @@ const Form = ({isOpen,isOver,gameID})=>{
   
     return (
       <div className="App">
-        <h1>Online Code Compiler</h1>
-        <p>Add Two Numbers</p>
+        <h1>{question.title}</h1>
+        <p>{question.text}</p>
         {/* <div>
           <label>Language:</label>
           <select

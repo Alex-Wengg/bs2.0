@@ -8,7 +8,11 @@ import JoinGame from './components/JoinGame';
 import socket from './socketConfig';
 import CodeRacer from './components/CodeRacer';
 function App() {
-  const [gameState,setGameState] = useState({_id : "",isOpen : false,players : [],words : []});
+  const [gameState,setGameState] = useState({_id : "",
+                                              isOpen : false,
+                                              players : [],
+                                              words : [],
+                                              question : {}});
   
   useEffect(()=>{
     socket.on('updateGame',(game)=>{
