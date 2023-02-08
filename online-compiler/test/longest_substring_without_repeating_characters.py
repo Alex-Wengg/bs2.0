@@ -17,7 +17,7 @@ file = var[-1][:-3]
 my_module = importlib.import_module(file)
 
  
-if (my_module.trap([0,1,0,2,1,0,1,3,2,1,2,1])) == 6 and my_module.trap([4,2,0,3,2,5]) == 9:
+if (my_module.lengthOfLongestSubstring("abcabcbb")) == 3 and my_module.lengthOfLongestSubstring("bbbbb") == 1 and my_module.lengthOfLongestSubstring("pwwkew") == 3:
     print('Passed', end = '')
 else:
     print('Test failed', end = '')

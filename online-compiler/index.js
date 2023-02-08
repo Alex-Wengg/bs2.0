@@ -13,10 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.post("/run", async (req, res) => {
-  const { language = "cpp", code, testFile } = req.body;
-
+  const { language = "cpp", code, testfile } = req.body;
   console.log(language, "Length:", code.length);
-
+  console.log(testfile)
   if (code === undefined) {
     console.log(" code === undefined: ");
 
@@ -27,15 +26,17 @@ app.post("/run", async (req, res) => {
     const filepath = await generateFile(language, code);
     // we need to run the file and send the response
     let output;
+  console.log(" ok")
+
     if (language === "cpp") {
       output = await executeCpp(filepath);
     } else if (language === "py") {
-      output = await executePy(filepath, testFile);
+      output = await executePy(filepath, testfile);
     }
-    fs.rmSync(filepath, {
-      force: true,
-  });
-    console.log(" output: ", output);
+
+    fs.unlinkSync(filepath );
+
+
     return res.json({ filepath, output });
   } catch (err) {
     res.status(500).json({ err });
