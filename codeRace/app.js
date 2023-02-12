@@ -144,9 +144,9 @@ io.on('connect',(socket)=>{
                 isPartyLeader : true,
                 nickName
             }
-            let question = questions[3]
+//             let question = questions[3]
 
-            // let question = questions[Math.floor(Math.random()*questions.length)]
+            let question = questions[Math.floor(Math.random()*questions.length)]
             console.log(question)
             game.question = question
             // add player
