@@ -17,7 +17,7 @@ file = var[-1][:-3]
 my_module = importlib.import_module(file)
 
  
-if (my_module.longestPalindrome("babad")) == "bab" and my_module.longestPalindrome("bbbbb") == 1 and my_module.longestPalindrome("cbbd") == "bb":
+if (my_module.longestPalindrome("babad")) == "bab" and my_module.longestPalindrome("bbbbb") == "bbbbb" and my_module.longestPalindrome("cbbd") == "bb":
     print('Passed', end = '')
 else:
     print('Test failed', end = '')
