@@ -14,11 +14,12 @@ const questions = require('./Models/Questions.json')
 
 mongoose.connect(
     // 'mongodb://mongo:27017/CodeRacer',
-    
-       "mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority",
+    process.env.MONGO,
+      // "mongodb+srv://bs2:bs2@cluster0.lssiosc.mongodb.net/?retryWrites=true&w=majority",
                  {useNewUrlParser : true, useUnifiedTopology : true},
                  ()=>{ console.log('successfully connected to database')});
-
+console.log("process.env.MONGO")
+console.log(process.env.MONGO)
 io.on('connect',(socket)=>{
 
     socket.on('userInput', async({userInput,gameID})=>{
