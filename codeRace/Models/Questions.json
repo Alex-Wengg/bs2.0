@@ -4,8 +4,8 @@
         "title" : "Two Sum",
         "text" : "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice. You can return the answer in any order.",
         "file" : "two_sum.py",
-        "output" : " eturn List[int]",
-        "starter" : "def twoSum(nums: list[int], target: int) -> list[int]:"
+        "output" : " return List[int]",
+        "starter" : "def twoSum(nums: list[int], target: int):"
     },
     {
         "id" : 42,
@@ -13,7 +13,6 @@
         "text": "Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
         "file" : "trapping_rain_water.py",
         "output" : "return int",
-
         "starter" : "def trap(height: list[int]):" 
     }, 
    {
@@ -22,7 +21,6 @@
         "text": "Given a string s, find the length of the longest substring without repeating characters.",
         "file" : "longest_substring_without_repeating_characters.py",
         "output" : "return str",
-        
         "starter" : "def lengthOfLongestSubstring(s: str):" 
     }, 
     {
@@ -31,7 +29,6 @@
         "text": "Given a string s,find the length of the longest substring without repeating characters.",
         "file" : "longest_palindromic_substring.py",
         "output" : "return str",
-
         "starter" : "def longestPalindrome(s: str):" 
     }, 
     {
@@ -40,7 +37,6 @@
         "text": "Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0. \n  Notice that the solution set must not contain duplicate triplets.",
         "file" : "3sum.py",
         "output" : "return int[][]",
-        
-        "starter" : "def threeSum(nums: list[int):" 
+        "starter" : "def threeSum(nums: list[int]):" 
     }
 ]
