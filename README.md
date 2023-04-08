@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/28949397/115994804-25d22900-a5f6-11eb-9194-58554f1c538d.png)
+Race your friends against each others in a coding competition
 
 System Design Diagram:
 ![image](https://user-images.githubusercontent.com/36247722/230731441-77a5107b-3a3b-44ab-b653-29e500af3fd9.png)
