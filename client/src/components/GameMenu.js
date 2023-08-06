@@ -5,6 +5,8 @@ const GameMenu = props =>{
     return(
         <div className="text-center">
             <h1>Welcome to Onliner Coder Race</h1>
+            <p> Currently in Alpha phase </p>
+
             <p>Race your friends to solve questions </p>
             <button type="button" onClick={()=> history('/game/create')}
                                   className="btn btn-primary btn-lg mr-3"
