@@ -1,4 +1,4 @@
-Race your friends against each others in a coding competition
+Race your friends against each other in a coding competition
 
 System Design Diagram:
 ![image](https://user-images.githubusercontent.com/36247722/230731441-77a5107b-3a3b-44ab-b653-29e500af3fd9.png)
@@ -13,3 +13,8 @@ Technology:
 - MongoDB
 - Google Cloud Docker Run
 - Docker Containers 
+
+Date of Activeness
+01/2023 - 04/2023
+05/2023 - 08/2023
+08/2023 - Present
